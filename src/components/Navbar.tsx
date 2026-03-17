@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import Button from './Button'
+import logoAdrien from '../assets/logo_adrien.png'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -18,17 +19,18 @@ export default function Navbar() {
   return (
     <header
       id="site-header"
-      className="fixed inset-x-0 top-0 z-40 border-b border-slate-100 bg-white/90 shadow-[0_1px_8px_rgba(0,0,0,0.06)] backdrop-blur"
+      className="fixed inset-x-0 top-0 z-50 w-full border-b border-slate-100 bg-white shadow-[0_1px_8px_rgba(0,0,0,0.06)]"
     >
       <div
         id="site-header-bar"
-        className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3"
+        className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6"
       >
         <a href="#" className="flex items-center gap-3">
-          {/* Logo : dépose logo.svg ou logo.png dans src/assets puis ajoute : import logo from '../assets/logo.svg' et <img src={logo} alt="R.A.R" className="h-10 w-10 object-contain" /> */}
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
-            R.A.R
-          </div>
+          <img
+            src={logoAdrien}
+            alt="R.A.R"
+            className="h-10 w-10 shrink-0 rounded-lg object-contain"
+          />
           <span className="text-sm font-bold tracking-tight text-slate-900">
             Adrien Renard Rénovation
           </span>
@@ -44,7 +46,7 @@ export default function Navbar() {
         {/* Burger (mobile) */}
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 bg-white/70 text-slate-900 shadow-sm backdrop-blur transition-colors hover:bg-white md:hidden"
+          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-900 shadow-sm transition-colors hover:bg-slate-50 md:hidden"
           aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
@@ -72,7 +74,7 @@ export default function Navbar() {
         id="mobile-nav"
         className={`md:hidden ${mobileOpen ? 'block' : 'hidden'}`}
       >
-        <div className="border-t border-slate-100 bg-white/95 backdrop-blur">
+        <div className="border-t border-slate-100 bg-white">
           <nav className="mx-auto max-w-6xl px-6 py-4">
             <div className="flex flex-col gap-2 text-sm font-medium text-slate-700">
               <a href="#apropos" className="rounded-md px-3 py-2 hover:bg-slate-50 hover:text-slate-900" onClick={close}>

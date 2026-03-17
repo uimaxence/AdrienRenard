@@ -36,7 +36,7 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900">
+    <div className="min-h-screen max-w-full overflow-x-hidden bg-white font-sans text-slate-900">
       <Navbar />
 
       <main className="flex flex-col gap-[100px]" style={{ paddingTop: navHeight }}>
@@ -61,7 +61,7 @@ function App() {
         >
           <button
             type="button"
-            className="flex w-full flex-col items-center justify-center gap-2 border-b border-slate-100 bg-white/95 px-4 py-3 text-center text-sm text-slate-600 shadow-[0_2px_8px_rgba(0,0,0,0.06)] backdrop-blur hover:bg-slate-50 hover:text-slate-900 sm:flex-row sm:gap-4"
+            className="flex w-full flex-col items-center justify-center gap-2 border-b border-slate-100 bg-white px-4 py-3 text-center text-sm text-slate-600 shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:bg-slate-50 hover:text-slate-900 sm:flex-row sm:gap-4"
             onClick={() =>
               document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
             }

@@ -12,6 +12,12 @@ body,
   height: 100%;
 }
 
+/* Empêche le débordement horizontal (animations slide-in) de créer un scroll lateral */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 /* Grille IntroSection : points scintillent de façon décalée, liens très discrets */
 @keyframes intro-point-glow {
   0%, 100% {

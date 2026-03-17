@@ -83,7 +83,7 @@ export default function WhyRARSection() {
   }, [])
 
   return (
-    <section className="px-6 py-16 lg:py-24" aria-labelledby="engagement-title">
+    <section className="overflow-hidden px-6 py-16 lg:py-24" aria-labelledby="engagement-title">
       <div className="mx-auto max-w-4xl">
         <h2
           id="engagement-title"
