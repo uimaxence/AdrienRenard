@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import Button from './Button'
 import logoAdrien from '../assets/logo_adrien.png'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
 
   const close = useCallback(() => setMobileOpen(false), [])
   const toggle = useCallback(() => setMobileOpen((v) => !v), [])
@@ -25,7 +27,7 @@ export default function Navbar() {
         id="site-header-bar"
         className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6"
       >
-        <a href="#" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <img
             src={logoAdrien}
             alt="R.A.R"
@@ -34,13 +36,32 @@ export default function Navbar() {
           <span className="text-sm font-bold tracking-tight text-slate-900">
             Adrien Renard Rénovation
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-          <a href="#apropos" className="hover:text-slate-900">À propos</a>
-          <a href="#services" className="hover:text-slate-900">Nos services</a>
-          <a href="#realisations" className="hover:text-slate-900">Réalisations</a>
-          <a href="#contact" className="hover:text-slate-900">Contact</a>
+          <a href="/#apropos" className="hover:text-slate-900">À propos</a>
+          <a href="/#services" className="hover:text-slate-900">Nos services</a>
+          <Link
+            to="/realisations"
+            className={`inline-flex items-center gap-1 hover:text-slate-900 ${
+              location.pathname === '/realisations' ? 'text-slate-900' : ''
+            }`}
+          >
+            Réalisations
+            <svg
+              className="h-4 w-4 text-slate-400"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </Link>
+          <a href="/#contact" className="hover:text-slate-900">Contact</a>
         </nav>
 
         {/* Burger (mobile) */}
@@ -77,22 +98,38 @@ export default function Navbar() {
         <div className="border-t border-slate-100 bg-white">
           <nav className="mx-auto max-w-6xl px-6 py-4">
             <div className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-              <a href="#apropos" className="rounded-md px-3 py-2 hover:bg-slate-50 hover:text-slate-900" onClick={close}>
+              <a href="/#apropos" className="rounded-md px-3 py-2 hover:bg-slate-50 hover:text-slate-900" onClick={close}>
                 À propos
               </a>
-              <a href="#services" className="rounded-md px-3 py-2 hover:bg-slate-50 hover:text-slate-900" onClick={close}>
+              <a href="/#services" className="rounded-md px-3 py-2 hover:bg-slate-50 hover:text-slate-900" onClick={close}>
                 Nos services
               </a>
-              <a href="#realisations" className="rounded-md px-3 py-2 hover:bg-slate-50 hover:text-slate-900" onClick={close}>
-                Réalisations
-              </a>
-              <a href="#contact" className="rounded-md px-3 py-2 hover:bg-slate-50 hover:text-slate-900" onClick={close}>
+              <Link
+                to="/realisations"
+                className="flex items-center justify-between rounded-md px-3 py-2 hover:bg-slate-50 hover:text-slate-900"
+                onClick={close}
+              >
+                <span>Réalisations</span>
+                <svg
+                  className="h-4 w-4 text-slate-400"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </Link>
+              <a href="/#contact" className="rounded-md px-3 py-2 hover:bg-slate-50 hover:text-slate-900" onClick={close}>
                 Contact
               </a>
             </div>
 
             <div className="mt-4">
-              <Button as="a" href="#contact" className="w-full justify-center" onClick={close}>
+              <Button as="a" href="/#contact" className="w-full justify-center" onClick={close}>
                 Demander un devis
               </Button>
             </div>
