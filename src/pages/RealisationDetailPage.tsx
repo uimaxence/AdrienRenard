@@ -48,29 +48,39 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
         }
 
         // Chemin "propre" si vous ajoutez un champ slug dans Contentful
-        let res = await contentfulClient.getEntries({
+        const res: any = await contentfulClient.getEntries({
           content_type: 'realisation',
           include: 3,
           limit: 1,
           'fields.slug': slug,
         } as any)
 
-        let entry = res.items?.[0]
+        let entry: any | undefined = res?.items?.[0]
 
         // Fallback si vous n’avez pas encore de champ slug : on fait un match sur title slugifié
         if (!entry) {
-          const all = await contentfulClient.getEntries({
+          const all: any = await contentfulClient.getEntries({
             content_type: 'realisation',
             include: 3,
             limit: 200,
           })
-          entry = (all.items ?? []).find((it: any) => slugify(it.fields?.title ?? '') === slug)
+          entry = (all?.items ?? []).find(
+            (it: any) => slugify(String(it?.fields?.title ?? '')) === slug,
+          )
         }
 
         if (!entry) throw new Error('Réalisation introuvable.')
 
-        const cover = getAssetUrl(entry.fields?.coverImage ?? entry.fields?.image)
-        const photosRaw = (entry.fields?.photos ?? entry.fields?.gallery ?? []) as any[]
+        const fields: any = entry.fields ?? {}
+        const title = typeof fields.title === 'string' ? fields.title : 'Réalisation'
+        const slugValue = typeof fields.slug === 'string' ? fields.slug : slugify(title)
+        const category = typeof fields.category === 'string' ? fields.category : 'Autre'
+        const description =
+          typeof fields.description === 'string' ? fields.description : undefined
+        const content = (fields.contenu ?? fields.content) as Document | null | undefined
+
+        const cover = getAssetUrl(fields.coverImage ?? fields.image)
+        const photosRaw = (fields.photos ?? fields.gallery ?? []) as any[]
         const photos = (Array.isArray(photosRaw) ? photosRaw : [])
           .map((a) => {
             const url = getAssetUrl(a)
@@ -81,11 +91,11 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
 
         const mapped: RealisationDetail = {
           id: entry.sys.id,
-          title: entry.fields?.title ?? 'Réalisation',
-          slug: entry.fields?.slug ?? slugify(entry.fields?.title ?? 'realisation'),
-          category: entry.fields?.category ?? 'Autre',
-          description: entry.fields?.description,
-          content: entry.fields?.contenu ?? entry.fields?.content,
+          title,
+          slug: slugValue,
+          category,
+          description,
+          content: content ?? undefined,
           coverUrl: cover,
           photos,
         }
