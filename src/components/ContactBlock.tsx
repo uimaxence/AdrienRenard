@@ -22,7 +22,7 @@ function useIsAvailable() {
 
 // TODO: remplacer par tes identifiants EmailJS
 const EMAILJS_SERVICE_ID = 'service_zlgy2mr'
-const EMAILJS_TEMPLATE_ID = 'template_krv23ns'
+const EMAILJS_TEMPLATE_ID = 'template_uozhvhc'
 const EMAILJS_PUBLIC_KEY = 'dGpc3mcK6MyBNAXvS'
 
 function ContactForm() {
