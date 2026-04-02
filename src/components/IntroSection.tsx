@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
-import adrien from '../assets/adrien.png'
+import adrien from '../assets/photo_renard.webp'
 
 const COLS = 48
 const ROWS = 32

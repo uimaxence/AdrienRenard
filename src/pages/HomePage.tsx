@@ -60,11 +60,11 @@ export default function HomePage({ navHeight }: { navHeight: number }) {
               </a>
               <span className="hidden text-slate-300 sm:inline">·</span>
               <a
-                href="mailto:adrienrenard@gmail.com"
+                href="mailto:contact@adrienrenard.fr"
                 className="font-medium text-primary hover:underline"
                 onClick={(e) => e.stopPropagation()}
               >
-                adrienrenard@gmail.com
+                contact@adrienrenard.fr
               </a>
             </div>
           </button>

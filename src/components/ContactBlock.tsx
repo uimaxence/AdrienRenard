@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import emailjs from '@emailjs/browser'
 import Button from './Button'
 
 function useIsAvailable() {
@@ -17,6 +18,87 @@ function useIsAvailable() {
   }, [])
 
   return available
+}
+
+// TODO: remplacer par tes identifiants EmailJS
+const EMAILJS_SERVICE_ID = 'service_zlgy2mr'
+const EMAILJS_TEMPLATE_ID = 'template_krv23ns'
+const EMAILJS_PUBLIC_KEY = 'dGpc3mcK6MyBNAXvS'
+
+function ContactForm() {
+  const formRef = useRef<HTMLFormElement>(null)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!formRef.current) return
+
+    setStatus('sending')
+    emailjs
+      .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formRef.current, EMAILJS_PUBLIC_KEY)
+      .then(() => {
+        setStatus('sent')
+        formRef.current?.reset()
+      })
+      .catch(() => {
+        setStatus('error')
+      })
+  }
+
+  if (status === 'sent') {
+    return (
+      <div className="flex flex-col items-center justify-center gap-3 px-8 py-8 text-center">
+        <span className="text-3xl">✅</span>
+        <p className="text-lg font-semibold text-slate-900">
+          Merci pour votre message !
+        </p>
+        <p className="text-sm text-slate-500">
+          Nous reviendrons vers vous rapidement.
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4 px-8 py-8">
+      <div className="grid grid-cols-2 gap-3">
+        <input
+          type="text"
+          name="prenom"
+          required
+          placeholder="Prénom"
+          className="h-10 rounded-md border border-slate-200 px-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+        />
+        <input
+          type="text"
+          name="nom"
+          required
+          placeholder="Nom"
+          className="h-10 rounded-md border border-slate-200 px-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+        />
+      </div>
+      <input
+        type="email"
+        name="email"
+        required
+        placeholder="Votre email"
+        className="h-10 rounded-md border border-slate-200 px-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+      />
+      <textarea
+        name="message"
+        rows={3}
+        required
+        placeholder="Décrivez votre projet…"
+        className="rounded-md border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-none"
+      />
+      {status === 'error' && (
+        <p className="text-xs text-red-500">Une erreur est survenue. Veuillez réessayer.</p>
+      )}
+      <Button type="submit" disabled={status === 'sending'} className="w-full justify-center">
+        {status === 'sending' ? 'Envoi en cours…' : 'Envoyer ma demande'}
+      </Button>
+    </form>
+  )
 }
 
 export default function ContactBlock() {
@@ -78,7 +160,7 @@ export default function ContactBlock() {
               06 52 21 20 17
             </a>
             <a
-              href="mailto:adrienrenard@gmail.com"
+              href="mailto:contact@adrienrenard.fr"
               className="group inline-flex items-center gap-2 font-semibold text-slate-900 underline decoration-slate-900 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
             >
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-slate-900 text-white transition-colors group-hover:bg-primary group-hover:text-white">
@@ -96,34 +178,13 @@ export default function ContactBlock() {
                   />
                 </svg>
               </span>
-              adrienrenard@gmail.com
+              contact@adrienrenard.fr
             </a>
           </div>
         </div>
 
         {/* Droite — formulaire */}
-        <form className="flex flex-col gap-4 px-8 py-8">
-          <div className="grid grid-cols-2 gap-3">
-            <input
-              type="text"
-              placeholder="Prénom"
-              className="h-10 rounded-md border border-slate-200 px-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-            />
-            <input
-              type="text"
-              placeholder="Nom"
-              className="h-10 rounded-md border border-slate-200 px-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-            />
-          </div>
-          <textarea
-            rows={3}
-            placeholder="Décrivez votre projet…"
-            className="rounded-md border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-none"
-          />
-          <Button type="submit" className="w-full justify-center">
-            Envoyer ma demande
-          </Button>
-        </form>
+        <ContactForm />
       </div>
     </section>
   )
