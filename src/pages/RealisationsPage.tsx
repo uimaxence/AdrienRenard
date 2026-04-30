@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { contentfulClient } from '../lib/contentful'
 import { slugify } from '../lib/slug'
+import SEO from '../components/SEO'
 
 type Realisation = {
   id: string
@@ -80,6 +81,11 @@ export default function RealisationsPage({ navHeight }: { navHeight: number }) {
 
   return (
     <main style={{ paddingTop: navHeight }}>
+      <SEO
+        path="/realisations"
+        title="Réalisations"
+        description="Découvrez les chantiers réalisés par Adrien Renard : rénovations intérieures, électricité, cuisines, salles de bains et plus encore."
+      />
       <section className="border-b border-slate-100 bg-white py-14 sm:py-16">
         <div className="mx-auto max-w-6xl px-6">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">

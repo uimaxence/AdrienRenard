@@ -5,6 +5,7 @@ import ServicesSection from '../components/ServicesSection'
 import ContactBlock from '../components/ContactBlock'
 import WhyRARSection from '../components/WhyRARSection'
 import CTASection from '../components/CTASection'
+import SEO from '../components/SEO'
 
 export default function HomePage({ navHeight }: { navHeight: number }) {
   const [isContactCollapsed, setIsContactCollapsed] = useState(false)
@@ -22,6 +23,7 @@ export default function HomePage({ navHeight }: { navHeight: number }) {
 
   return (
     <>
+      <SEO path="/" />
       <main className="flex flex-col gap-[100px]" style={{ paddingTop: navHeight }}>
         {/* Hero + Contact : un seul bloc pour que le contact chevauche le hero */}
         <div>

@@ -4,6 +4,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import type { Document } from '@contentful/rich-text-types'
 import { contentfulClient } from '../lib/contentful'
 import { slugify } from '../lib/slug'
+import SEO from '../components/SEO'
 
 type RealisationDetail = {
   id: string
@@ -117,6 +118,15 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
 
   return (
     <main style={{ paddingTop: navHeight }}>
+      {item && (
+        <SEO
+          path={`/realisations/${item.slug}`}
+          title={`${item.title} — ${item.category}`}
+          description={item.description}
+          image={item.coverUrl}
+          type="article"
+        />
+      )}
       <section className="border-b border-slate-100 bg-white py-8 sm:py-10">
         <div className="mx-auto max-w-6xl px-6">
           <Link to="/realisations" className="text-sm font-medium text-slate-600 hover:text-slate-900">
