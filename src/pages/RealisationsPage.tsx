@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { contentfulClient } from '../lib/contentful'
+import { contentfulClient, cfImage } from '../lib/contentful'
 import { slugify } from '../lib/slug'
 import SEO from '../components/SEO'
 
@@ -150,10 +150,11 @@ export default function RealisationsPage({ navHeight }: { navHeight: number }) {
                       <Link to={`/realisations/${it.slug}`} className="block h-full w-full">
                         {it.coverUrl ? (
                           <img
-                            src={it.coverUrl}
+                            src={cfImage(it.coverUrl, 600)}
                             alt={it.title}
                             className="h-full w-full object-cover"
                             loading="lazy"
+                            decoding="async"
                           />
                         ) : null}
                       </Link>

@@ -1,8 +1,8 @@
 import BeforeAfterSlider from './BeforeAfterSlider'
 import Button from './Button'
 
-import cuisineBefore from '../assets/cuisine-before.png'
-import cuisineAfter from '../assets/cuisine-after.png'
+import cuisineBefore from '../assets/cuisine-before.webp'
+import cuisineAfter from '../assets/cuisine-after.webp'
 
 export default function CTASection() {
   return (

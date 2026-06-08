@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import elec1 from '../assets/elec-1.jpg'
-import int1 from '../assets/int-1.jpg'
-import int2 from '../assets/int-2.jpg'
+import elec1 from '../assets/elec-1.webp'
+import int1 from '../assets/int-1.webp'
+import int2 from '../assets/int-2.webp'
 
 const services = [
   {
@@ -125,6 +125,8 @@ export default function ServicesSection() {
                 <img
                   src={service.image}
                   alt=""
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
               </div>

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import type { Document } from '@contentful/rich-text-types'
-import { contentfulClient } from '../lib/contentful'
+import { contentfulClient, cfImage } from '../lib/contentful'
 import { slugify } from '../lib/slug'
 import SEO from '../components/SEO'
 
@@ -123,7 +123,7 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
           path={`/realisations/${item.slug}`}
           title={`${item.title} — ${item.category}`}
           description={item.description}
-          image={item.coverUrl}
+          image={cfImage(item.coverUrl, 1200, { format: 'jpg', quality: 80 })}
           type="article"
         />
       )}
@@ -161,10 +161,11 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
               {item.coverUrl ? (
                 <div className="mt-8 overflow-hidden rounded-2xl border border-slate-100 bg-slate-100 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
                   <img
-                    src={item.coverUrl}
+                    src={cfImage(item.coverUrl, 1280)}
                     alt={item.title}
                     className="h-[340px] w-full object-cover sm:h-[420px]"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
               ) : null}
@@ -193,10 +194,11 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
                         className="overflow-hidden rounded-xl border border-slate-100 bg-slate-100"
                       >
                         <img
-                          src={p.url}
+                          src={cfImage(p.url, 600)}
                           alt={p.title ?? `${item.title} — photo ${idx + 1}`}
                           className="h-52 w-full object-cover"
                           loading="lazy"
+                          decoding="async"
                         />
                       </figure>
                     ))}

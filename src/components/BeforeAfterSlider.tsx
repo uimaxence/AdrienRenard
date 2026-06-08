@@ -56,6 +56,8 @@ export default function BeforeAfterSlider({
       <img
         src={afterImage}
         alt={afterLabel}
+        loading="lazy"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover"
       />
       {/* Image "avant" (à gauche, masque selon position) */}
@@ -66,6 +68,8 @@ export default function BeforeAfterSlider({
         <img
           src={beforeImage}
           alt={beforeLabel}
+          loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover"
         />
       </div>

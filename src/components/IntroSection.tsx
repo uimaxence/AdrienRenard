@@ -149,6 +149,8 @@ export default function IntroSection() {
           <img
             src={adrien}
             alt="Adrien Renard, artisan en rénovation et électricité"
+            loading="lazy"
+            decoding="async"
             className="w-full rounded-lg object-cover shadow-lg"
           />
         </div>
