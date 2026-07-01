@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
-import RealisationsPage from './pages/RealisationsPage'
-import RealisationDetailPage from './pages/RealisationDetailPage'
+
+// Pages Réalisations chargées à la demande : elles embarquent le SDK Contentful
+// et le rendu rich-text, inutiles sur la page d'accueil.
+const RealisationsPage = lazy(() => import('./pages/RealisationsPage'))
+const RealisationDetailPage = lazy(() => import('./pages/RealisationDetailPage'))
 
 function App() {
   const [navHeight, setNavHeight] = useState(65)
@@ -31,12 +34,14 @@ function App() {
     <div className="min-h-screen max-w-full overflow-x-hidden bg-white font-sans text-slate-900">
       <Navbar />
 
-      <Routes>
-        <Route path="/" element={<HomePage navHeight={navHeight} />} />
-        <Route path="/realisations" element={<RealisationsPage navHeight={navHeight} />} />
-        <Route path="/realisations/:slug" element={<RealisationDetailPage navHeight={navHeight} />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
+        <Routes>
+          <Route path="/" element={<HomePage navHeight={navHeight} />} />
+          <Route path="/realisations" element={<RealisationsPage navHeight={navHeight} />} />
+          <Route path="/realisations/:slug" element={<RealisationDetailPage navHeight={navHeight} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </div>
   )

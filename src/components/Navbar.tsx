@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import Button from './Button'
-import logoAdrien from '../assets/logo_adrien.png'
+import logoAdrien from '../assets/logo_adrien.webp'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -31,6 +31,8 @@ export default function Navbar() {
           <img
             src={logoAdrien}
             alt="R.A.R"
+            width={40}
+            height={40}
             className="h-10 w-10 shrink-0 rounded-lg object-contain"
           />
           <span className="text-sm font-bold tracking-tight text-slate-900">

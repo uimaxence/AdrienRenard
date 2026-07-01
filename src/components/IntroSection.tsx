@@ -1,12 +1,32 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import adrien from '../assets/photo_renard.webp'
 
-const COLS = 48
-const ROWS = 32
+const COLS = 32
+const ROWS = 20
 
 export default function IntroSection() {
   const svgRef = useRef<SVGSVGElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const [gridVisible, setGridVisible] = useState(false)
   const [hoveredCell, setHoveredCell] = useState<{ x: number; y: number } | null>(null)
+
+  // La grille animée (~1000 nœuds SVG) n'est montée qu'une fois la section
+  // approchée dans le viewport : évite de plomber le temps de blocage au chargement.
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setGridVisible(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '200px 0px' },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   const points: [number, number][] = []
   for (let j = 0; j < ROWS; j++) {
@@ -65,6 +85,7 @@ export default function IntroSection() {
 
   return (
     <section
+      ref={sectionRef}
       id="apropos"
       className="relative overflow-hidden border-t border-slate-100 bg-slate-50/50 py-16 md:py-20"
       onMouseMove={handleMouseMove}
@@ -75,6 +96,7 @@ export default function IntroSection() {
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.4]"
         aria-hidden
       >
+        {gridVisible && (
         <svg
           ref={svgRef}
           className="h-full w-full"
@@ -142,6 +164,7 @@ export default function IntroSection() {
             ))}
           </g>
         </svg>
+        )}
       </div>
 
       <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-10 px-6 lg:flex-row lg:items-center lg:gap-16">
@@ -149,6 +172,8 @@ export default function IntroSection() {
           <img
             src={adrien}
             alt="Adrien Renard, artisan en rénovation et électricité"
+            width={600}
+            height={800}
             loading="lazy"
             decoding="async"
             className="w-full rounded-lg object-cover shadow-lg"
