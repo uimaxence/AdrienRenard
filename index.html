@@ -34,6 +34,47 @@
     />
     <meta name="twitter:image" content="https://adrienrenard.fr/og-default.jpg" />
 
+    <!-- Données structurées : entreprise locale (SEO local Google) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["GeneralContractor", "HomeAndConstructionBusiness"],
+        "@id": "https://adrienrenard.fr/#business",
+        "name": "R.A.R — Adrien Renard Rénovation",
+        "description": "Artisan en rénovation intérieure et électricité à Angers et en Maine-et-Loire : cuisines, salles de bains, sols, peinture, aménagement, mise aux normes électriques.",
+        "url": "https://adrienrenard.fr/",
+        "image": "https://adrienrenard.fr/og-default.jpg",
+        "telephone": "+33652212017",
+        "email": "contact@adrienrenard.fr",
+        "priceRange": "€€",
+        "founder": { "@type": "Person", "name": "Adrien Renard" },
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "Maine-et-Loire",
+          "addressCountry": "FR"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Maine-et-Loire (49)" },
+          { "@type": "City", "name": "Angers" }
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+          }
+        ],
+        "makesOffer": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rénovation intérieure" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Installation et rénovation de cuisines" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rénovation de salles de bains et sanitaires" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Électricité et mise aux normes (tableau électrique)" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Aménagements extérieurs (terrasses, portails, abris)" } }
+        ]
+      }
+    </script>
+
     <!-- Satoshi auto-hébergée : préchargement de la police variable (poids 300–900) -->
     <link
       rel="preload"
