@@ -15,7 +15,7 @@ export default function Footer() {
           <a href="/#contact" className="hover:text-slate-900">
             Contact
           </a>
-          <a href="#mentions-legales" className="hover:text-slate-900">
+          <a href="/mentions-legales" className="hover:text-slate-900">
             Mentions légales
           </a>
         </nav>

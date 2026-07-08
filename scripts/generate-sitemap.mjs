@@ -59,6 +59,7 @@ async function main() {
   const urls = [
     urlEntry(`${SITE_URL}/`, today, '1.0', 'monthly'),
     urlEntry(`${SITE_URL}/realisations`, today, '0.8', 'weekly'),
+    urlEntry(`${SITE_URL}/mentions-legales`, today, '0.2', 'yearly'),
     ...realisations
       .filter((r) => r.slug)
       .map((r) =>

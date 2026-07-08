@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage'
 // et le rendu rich-text, inutiles sur la page d'accueil.
 const RealisationsPage = lazy(() => import('./pages/RealisationsPage'))
 const RealisationDetailPage = lazy(() => import('./pages/RealisationDetailPage'))
+const MentionsLegalesPage = lazy(() => import('./pages/MentionsLegalesPage'))
 
 function App() {
   const [navHeight, setNavHeight] = useState(65)
@@ -39,6 +40,7 @@ function App() {
           <Route path="/" element={<HomePage navHeight={navHeight} />} />
           <Route path="/realisations" element={<RealisationsPage navHeight={navHeight} />} />
           <Route path="/realisations/:slug" element={<RealisationDetailPage navHeight={navHeight} />} />
+          <Route path="/mentions-legales" element={<MentionsLegalesPage navHeight={navHeight} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
