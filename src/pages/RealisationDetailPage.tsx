@@ -7,6 +7,7 @@ import type { Document } from '@contentful/rich-text-types'
 import { contentfulClient, cfImage } from '../lib/contentful'
 import { slugify } from '../lib/slug'
 import SEO from '../components/SEO'
+import Lightbox from '../components/Lightbox'
 
 // Rendu personnalisé du contenu Rich Text : hiérarchie de titres claire + espacement.
 const richTextOptions: Options = {
@@ -59,6 +60,7 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [item, setItem] = useState<RealisationDetail | null>(null)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   useEffect(() => {
     let cancelled = false
@@ -214,22 +216,40 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
                 ) : (
                   <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {item.photos.map((p, idx) => (
-                      <figure
+                      <button
+                        type="button"
                         key={`${p.url}-${idx}`}
-                        className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl border border-slate-100 bg-slate-100"
+                        onClick={() => setLightboxIndex(idx)}
+                        aria-label={`Agrandir la photo ${idx + 1}`}
+                        className="group relative flex aspect-[4/3] cursor-zoom-in items-center justify-center overflow-hidden rounded-xl border border-slate-100 bg-slate-100"
                       >
                         <img
                           src={cfImage(p.url, 800)}
                           alt={p.title ?? `${item.title} — photo ${idx + 1}`}
-                          className="max-h-full max-w-full object-contain"
+                          className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                           loading="lazy"
                           decoding="async"
                         />
-                      </figure>
+                        <span className="pointer-events-none absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white opacity-0 transition-opacity group-hover:opacity-100">
+                          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M11 8v6M8 11h6M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+                          </svg>
+                        </span>
+                      </button>
                     ))}
                   </div>
                 )}
               </div>
+
+              <Lightbox
+                photos={item.photos.map((p, idx) => ({
+                  url: p.url,
+                  alt: p.title ?? `${item.title} — photo ${idx + 1}`,
+                }))}
+                index={lightboxIndex}
+                onClose={() => setLightboxIndex(null)}
+                onIndexChange={setLightboxIndex}
+              />
             </>
           )}
         </div>
