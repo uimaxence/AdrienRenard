@@ -33,7 +33,7 @@ function App() {
   }, [location.pathname])
 
   return (
-    <div className="min-h-screen max-w-full overflow-x-hidden bg-white font-sans text-slate-900">
+    <div className="min-h-screen max-w-full overflow-x-clip bg-white font-sans text-slate-900">
       <Navbar />
 
       <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>

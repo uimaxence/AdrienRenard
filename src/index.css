@@ -28,9 +28,12 @@ body,
   height: 100%;
 }
 
-/* Empêche le débordement horizontal (animations slide-in) de créer un scroll lateral */
+/* Empêche le débordement horizontal (animations slide-in) de créer un scroll latéral.
+   overflow-x: clip (et non hidden) évite de transformer le body en conteneur de
+   scroll : la fenêtre reste le scroller, donc window.scrollTo fonctionne au
+   changement de page. */
 html, body {
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
 }
 
