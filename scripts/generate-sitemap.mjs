@@ -8,7 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 config({ path: resolve(__dirname, '..', '.env.local') })
 config({ path: resolve(__dirname, '..', '.env') })
 
-const SITE_URL = 'https://adrienrenard.fr'
+const SITE_URL = 'https://www.adrienrenard.fr'
 
 function slugify(value) {
   return String(value)

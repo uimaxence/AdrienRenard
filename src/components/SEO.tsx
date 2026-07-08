@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 
-const SITE_URL = 'https://adrienrenard.fr'
+const SITE_URL = 'https://www.adrienrenard.fr'
 const SITE_NAME = 'R.A.R — Rénovation Adrien Renard'
 const DEFAULT_DESCRIPTION =
   'Adrien Renard, artisan en rénovation intérieure et électricité. Cuisines, salles de bains, sols, peinture, mise aux normes électriques. Devis gratuit.'

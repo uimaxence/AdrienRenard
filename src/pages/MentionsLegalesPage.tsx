@@ -17,30 +17,38 @@ export default function MentionsLegalesPage({ navHeight }: { navHeight: number }
           <div>
             <h2 className="text-lg font-bold text-slate-900">Éditeur du site</h2>
             <p className="mt-2 leading-relaxed">
-              Le présent site est édité par <strong>Adrien Renard Rénovation (R.A.R)</strong>,
-              entreprise artisanale de rénovation intérieure et d'électricité, basée en
-              Maine-et-Loire (49), France.
+              Le présent site est édité par la société <strong>ADRIEN RENARD</strong>, société
+              par actions simplifiée unipersonnelle (SASU) au capital de 4 000 €, exerçant sous
+              l'enseigne <strong>R.A.R — Adrien Renard Rénovation</strong> (rénovation
+              intérieure et électricité).
+              <br />
+              Siège social : 9 bis rue de l'Industrie, La Jubaudière, 49510
+              Beaupréau-en-Mauges, France
+              <br />
+              SIREN : 943 013 979 — SIRET (siège) : 943 013 979 00019
+              <br />
+              RCS : 943 013 979 R.C.S. Angers
+              <br />
+              TVA intracommunautaire : FR89 943 013 979
               <br />
               Téléphone :{' '}
               <a href="tel:0652212017" className="text-primary hover:underline">
                 06 52 21 20 17
-              </a>
-              <br />
-              E-mail :{' '}
+              </a>{' '}
+              — E-mail :{' '}
               <a href="mailto:contact@adrienrenard.fr" className="text-primary hover:underline">
                 contact@adrienrenard.fr
               </a>
-              <br />
-              SIRET : 943 013 979 00019
             </p>
           </div>
 
           <div>
-            <h2 className="text-lg font-bold text-slate-900">
-              Responsable de la publication et du contenu
-            </h2>
+            <h2 className="text-lg font-bold text-slate-900">Direction de la publication</h2>
             <p className="mt-2 leading-relaxed">
-              Maxence Cailleau —{' '}
+              Directeur de la publication : Adrien Renard, en qualité de représentant légal de
+              la société.
+              <br />
+              Responsable du contenu et réalisation du site : Maxence Cailleau —{' '}
               <a
                 href="mailto:maxencecailleau.pro@gmail.com"
                 className="text-primary hover:underline"
@@ -73,7 +81,7 @@ export default function MentionsLegalesPage({ navHeight }: { navHeight: number }
             <h2 className="text-lg font-bold text-slate-900">Propriété intellectuelle</h2>
             <p className="mt-2 leading-relaxed">
               L'ensemble des contenus présents sur ce site (textes, photographies, logo,
-              éléments graphiques) est la propriété exclusive d'Adrien Renard Rénovation, sauf
+              éléments graphiques) est la propriété exclusive de la société ADRIEN RENARD, sauf
               mention contraire. Toute reproduction, représentation, modification ou diffusion,
               totale ou partielle, sans autorisation écrite préalable, est interdite et
               constitue une contrefaçon au sens des articles L.335-2 et suivants du Code de la
