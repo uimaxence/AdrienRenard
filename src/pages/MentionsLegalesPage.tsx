@@ -31,7 +31,7 @@ export default function MentionsLegalesPage({ navHeight }: { navHeight: number }
                 contact@adrienrenard.fr
               </a>
               <br />
-              SIRET : <em>à compléter</em>
+              SIRET : 943 013 979 00019
             </p>
           </div>
 
