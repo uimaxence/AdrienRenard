@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import elec1 from '../assets/elec-1.webp'
 import int1 from '../assets/int-1.webp'
 import int2 from '../assets/int-2.webp'
@@ -10,7 +11,7 @@ const services = [
     image: int1,
     description:
       'Cloisons, revêtements de sol, peinture, isolation. Je rénove vos espaces pour les rendre plus beaux et plus confortables.',
-    href: '#services-travaux',
+    href: '/services/renovation-interieure',
     icon: (
       <svg
         className="h-10 w-10 text-slate-900"
@@ -33,7 +34,7 @@ const services = [
     image: elec1,
     description:
       'Mise aux normes, création ou modification de tableau électrique, installation de systèmes modernes. Travaux certifiés.',
-    href: '#services-electricite',
+    href: '/services/electricite',
     icon: (
       <svg
         className="h-10 w-10 text-slate-900"
@@ -56,7 +57,7 @@ const services = [
     image: int2,
     description:
       'Cuisine, salle de bain, chambre… Je conçois et réalise des espaces adaptés à vos envies et à votre mode de vie.',
-    href: '#services-amenagement',
+    href: '/services/amenagement-sur-mesure',
     icon: (
       <svg
         className="h-10 w-10 text-slate-900"
@@ -143,8 +144,8 @@ export default function ServicesSection() {
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
                   {service.description}
                 </p>
-                <a
-                  href={service.href}
+                <Link
+                  to={service.href}
                   className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 underline decoration-slate-900 underline-offset-4 transition-colors group-hover:text-primary group-hover:decoration-primary"
                 >
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-slate-900 text-white transition-colors group-hover:bg-primary group-hover:text-white">
@@ -163,7 +164,7 @@ export default function ServicesSection() {
                     </svg>
                   </span>
                   Découvrir ce service
-                </a>
+                </Link>
               </div>
             </article>
           ))}

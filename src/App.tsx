@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage'
 const RealisationsPage = lazy(() => import('./pages/RealisationsPage'))
 const RealisationDetailPage = lazy(() => import('./pages/RealisationDetailPage'))
 const MentionsLegalesPage = lazy(() => import('./pages/MentionsLegalesPage'))
+const ServicePage = lazy(() => import('./pages/ServicePage'))
 
 function App() {
   const [navHeight, setNavHeight] = useState(65)
@@ -40,6 +41,7 @@ function App() {
           <Route path="/" element={<HomePage navHeight={navHeight} />} />
           <Route path="/realisations" element={<RealisationsPage navHeight={navHeight} />} />
           <Route path="/realisations/:slug" element={<RealisationDetailPage navHeight={navHeight} />} />
+          <Route path="/services/:slug" element={<ServicePage navHeight={navHeight} />} />
           <Route path="/mentions-legales" element={<MentionsLegalesPage navHeight={navHeight} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
