@@ -159,19 +159,24 @@ const mime = (f) =>
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 async function main() {
-  const client = createClient({ accessToken: CMA_TOKEN })
-  const space = await client.getSpace(SPACE_ID)
-  const env = await space.getEnvironment(ENVIRONMENT)
+  const client = createClient(
+    { accessToken: CMA_TOKEN },
+    { type: 'plain', defaults: { spaceId: SPACE_ID, environmentId: ENVIRONMENT } },
+  )
 
-  const locales = await env.getLocales()
+  const locales = await client.locale.getMany({ query: { limit: 100 } })
   const LOC = (locales.items.find((l) => l.default) || locales.items[0]).code
   console.log(`Espace ${SPACE_ID} / ${ENVIRONMENT} · locale par défaut : ${LOC}`)
 
   // slugs déjà présents (idempotence)
-  const existing = await env.getEntries({ content_type: 'realisation', limit: 1000 })
+  const existing = await client.entry.getMany({
+    query: { content_type: 'realisation', limit: 1000 },
+  })
   const existingSlugs = new Set(
     existing.items.map((e) => e.fields.slug?.[LOC]).filter(Boolean),
   )
+
+  const link = (id) => ({ sys: { type: 'Link', linkType: 'Asset', id } })
 
   for (const r of REALISATIONS) {
     if (existingSlugs.has(r.slug)) {
@@ -195,43 +200,49 @@ async function main() {
     for (const file of files) {
       idx++
       const alt = `${r.altBase} — Adrien Renard (photo ${idx})`
-      let asset = await env.createAssetFromFiles({
-        fields: {
-          title: { [LOC]: alt },
-          description: { [LOC]: alt },
-          file: {
-            [LOC]: {
-              contentType: mime(file),
-              fileName: file,
-              file: readFileSync(join(dir, file)),
+      const upload = await client.upload.create({}, { file: readFileSync(join(dir, file)) })
+      let asset = await client.asset.create(
+        {},
+        {
+          fields: {
+            title: { [LOC]: alt },
+            description: { [LOC]: alt },
+            file: {
+              [LOC]: {
+                contentType: mime(file),
+                fileName: file,
+                uploadFrom: { sys: { type: 'Link', linkType: 'Upload', id: upload.sys.id } },
+              },
             },
           },
         },
-      })
-      asset = await asset.processForAllLocales()
+      )
+      asset = await client.asset.processForAllLocales({}, asset)
       // attend que l'URL du fichier soit prête avant publication
-      for (let t = 0; t < 10 && !asset.fields.file?.[LOC]?.url; t++) {
+      for (let t = 0; t < 12 && !asset.fields.file?.[LOC]?.url; t++) {
         await sleep(1500)
-        asset = await env.getAsset(asset.sys.id)
+        asset = await client.asset.get({ assetId: asset.sys.id })
       }
-      await asset.publish()
+      asset = await client.asset.publish({ assetId: asset.sys.id }, asset)
       assetIds.push(asset.sys.id)
       process.stdout.write(`  · photo ${idx}/${files.length}\r`)
     }
-    const link = (id) => ({ sys: { type: 'Link', linkType: 'Asset', id } })
 
-    let entry = await env.createEntry('realisation', {
-      fields: {
-        title: { [LOC]: r.title },
-        slug: { [LOC]: r.slug },
-        category: { [LOC]: r.category },
-        description: { [LOC]: r.description },
-        contenu: { [LOC]: richText(r.body) },
-        coverImage: { [LOC]: link(assetIds[0]) },
-        photos: { [LOC]: assetIds.map(link) },
+    let entry = await client.entry.create(
+      { contentTypeId: 'realisation' },
+      {
+        fields: {
+          title: { [LOC]: r.title },
+          slug: { [LOC]: r.slug },
+          category: { [LOC]: r.category },
+          description: { [LOC]: r.description },
+          contenu: { [LOC]: richText(r.body) },
+          coverImage: { [LOC]: link(assetIds[0]) },
+          photos: { [LOC]: assetIds.map(link) },
+        },
       },
-    })
-    await entry.publish()
+    )
+    await client.entry.publish({ entryId: entry.sys.id }, entry)
     console.log(`  ✓ entrée publiée : /realisations/${r.slug}`)
   }
 

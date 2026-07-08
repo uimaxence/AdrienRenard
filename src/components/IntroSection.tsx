@@ -189,7 +189,7 @@ export default function IntroSection() {
               pièce, refaire votre installation électrique ou repenser entièrement
               votre intérieur, je suis là pour vous accompagner de A à Z.
             </p>
-            <p className="leading-relaxed">
+            <p className="rounded-xl border border-slate-100 bg-white p-6 leading-relaxed text-slate-700 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
               En tant qu'artisan indépendant, je suis votre interlocuteur unique du
               premier contact jusqu'à la réception du chantier. Pas d'intermédiaire,
               pas de mauvaise surprise.

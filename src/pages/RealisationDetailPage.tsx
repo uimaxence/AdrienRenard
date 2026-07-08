@@ -1,10 +1,37 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import type { Options } from '@contentful/rich-text-react-renderer'
+import { BLOCKS } from '@contentful/rich-text-types'
 import type { Document } from '@contentful/rich-text-types'
 import { contentfulClient, cfImage } from '../lib/contentful'
 import { slugify } from '../lib/slug'
 import SEO from '../components/SEO'
+
+// Rendu personnalisé du contenu Rich Text : hiérarchie de titres claire + espacement.
+const richTextOptions: Options = {
+  renderNode: {
+    [BLOCKS.HEADING_2]: (_node, children) => (
+      <h2 className="mt-8 text-2xl font-bold tracking-tight text-slate-900 first:mt-0">
+        {children}
+      </h2>
+    ),
+    [BLOCKS.HEADING_3]: (_node, children) => (
+      <h3 className="mt-6 text-xl font-bold tracking-tight text-slate-900 first:mt-0">
+        {children}
+      </h3>
+    ),
+    [BLOCKS.PARAGRAPH]: (_node, children) => (
+      <p className="mt-4 leading-relaxed text-slate-600">{children}</p>
+    ),
+    [BLOCKS.UL_LIST]: (_node, children) => (
+      <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-600">{children}</ul>
+    ),
+    [BLOCKS.OL_LIST]: (_node, children) => (
+      <ol className="mt-4 list-decimal space-y-2 pl-5 text-slate-600">{children}</ol>
+    ),
+  },
+}
 
 type RealisationDetail = {
   id: string
@@ -172,16 +199,14 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
 
               {/* Contenu (Rich Text Contentful) */}
               {item.content ? (
-                <div className="mt-10 max-w-3xl">
-                  <div className="prose prose-slate max-w-none prose-headings:tracking-tight prose-a:text-primary prose-a:underline prose-a:decoration-primary/40 hover:prose-a:decoration-primary">
-                    {documentToReactComponents(item.content)}
-                  </div>
+                <div className="mt-10 max-w-3xl rounded-2xl border border-slate-100 bg-slate-50/70 p-6 text-[17px] sm:p-8">
+                  {documentToReactComponents(item.content, richTextOptions)}
                 </div>
               ) : null}
 
               {/* Photos (champ Contentful recommandé : photos [Media, many]) */}
               <div className="mt-12">
-                <h2 className="text-xl font-bold text-slate-900">Photos</h2>
+                <h2 className="text-2xl font-bold tracking-tight text-slate-900">Photos</h2>
                 {item.photos.length === 0 ? (
                   <p className="mt-3 text-sm text-slate-600">
                     Ajoutez des photos à cette réalisation dans Contentful pour les afficher ici.
@@ -191,12 +216,12 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
                     {item.photos.map((p, idx) => (
                       <figure
                         key={`${p.url}-${idx}`}
-                        className="overflow-hidden rounded-xl border border-slate-100 bg-slate-100"
+                        className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl border border-slate-100 bg-slate-100"
                       >
                         <img
-                          src={cfImage(p.url, 600)}
+                          src={cfImage(p.url, 800)}
                           alt={p.title ?? `${item.title} — photo ${idx + 1}`}
-                          className="h-52 w-full object-cover"
+                          className="max-h-full max-w-full object-contain"
                           loading="lazy"
                           decoding="async"
                         />
