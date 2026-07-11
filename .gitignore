@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Photos sources des chantiers (non versionnées, trop lourdes)
+src/assets/new chantier/
+photos-a-importer/

@@ -2,96 +2,144 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.adrienrenard.fr/</loc>
-    <lastmod>2026-07-08</lastmod>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.adrienrenard.fr/realisations</loc>
-    <lastmod>2026-07-08</lastmod>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.adrienrenard.fr/services/renovation-interieure</loc>
-    <lastmod>2026-07-08</lastmod>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.adrienrenard.fr/services/electricite</loc>
-    <lastmod>2026-07-08</lastmod>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.adrienrenard.fr/services/amenagement-sur-mesure</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.adrienrenard.fr/services/cuisines-salles-de-bains</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.adrienrenard.fr/mentions-legales</loc>
-    <lastmod>2026-07-08</lastmod>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://www.adrienrenard.fr/realisations/salle-bain-beton-cire</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.adrienrenard.fr/realisations/abri-stockage-containers-gers</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.adrienrenard.fr/realisations/salle-bain-travertin</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.adrienrenard.fr/realisations/portail-coulissant-motorise-gers</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.adrienrenard.fr/realisations/renovation-globale-maison-deux-sevres</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.adrienrenard.fr/realisations/terrasse-bois-douglas-gers</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.adrienrenard.fr/realisations/renovation-globale-maison-maine-et-loire</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.adrienrenard.fr/realisations/transformation-kitchenette-beaucouze</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.adrienrenard.fr/realisations/tableau-electrique-mise-aux-normes</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.adrienrenard.fr/realisations/renovation-cuisine-noire-bois</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.adrienrenard.fr/realisations/amenagements-exterieurs-terrasses-portails</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.adrienrenard.fr/realisations/renovation-chambres</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.adrienrenard.fr/realisations/renovation-wc-sanitaires</loc>
-    <lastmod>2026-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.adrienrenard.fr/realisations/renovation-salon-salle-a-manger</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.adrienrenard.fr/realisations/creation-cuisine-professionnelle-verriere</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.adrienrenard.fr/realisations/renovation-cuisines-angers</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/renovation-chambres</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/escalier-limon-central-acier-chene</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/renovation-salle-a-manger-gers</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/renovation-complete-rez-de-chaussee</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/creation-de-gites</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/rehabilitation-logement-agricole-deux-sevres</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/renovation-wc-sanitaires</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/renovation-salle-de-bain-angers</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/salle-bain-travertin</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/salle-bain-beton-cire</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.adrienrenard.fr/realisations/tableau-electrique-mise-aux-normes</loc>
     <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

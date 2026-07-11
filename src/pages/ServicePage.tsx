@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { contentfulClient, cfImage } from '../lib/contentful'
 import { slugify } from '../lib/slug'
-import { getService } from '../data/services'
+import { getService, realisationsUrl } from '../data/services'
 import SEO from '../components/SEO'
 import Button from '../components/Button'
 
@@ -62,6 +62,20 @@ export default function ServicePage({ navHeight }: { navHeight: number }) {
     }
   }, [service])
 
+  // Données structurées FAQ : éligibles aux résultats enrichis Google
+  const faqJsonLd = useMemo(() => {
+    if (!service || service.faq.length === 0) return null
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: service.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    }
+  }, [service])
+
   if (!service) {
     return (
       <main style={{ paddingTop: navHeight }}>
@@ -85,6 +99,9 @@ export default function ServicePage({ navHeight }: { navHeight: number }) {
       {jsonLd && (
         <Helmet>
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+          {faqJsonLd && (
+            <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
+          )}
         </Helmet>
       )}
 
@@ -138,6 +155,54 @@ export default function ServicePage({ navHeight }: { navHeight: number }) {
         </div>
       </section>
 
+      {/* Contenu long (SEO local) */}
+      {service.sections.length > 0 && (
+        <section className="border-t border-slate-100 bg-white py-14 sm:py-16">
+          <div className="mx-auto max-w-4xl px-6">
+            {service.sections.map((s) => (
+              <div key={s.title} className="mt-10 first:mt-0">
+                <h2 className="text-2xl font-bold tracking-tight text-slate-900">{s.title}</h2>
+                {s.paragraphs.map((p, i) => (
+                  <p key={i} className="mt-4 leading-relaxed text-slate-600">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* CTA rendez-vous */}
+      <section className="bg-slate-50/70 py-14 sm:py-16">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="rounded-2xl border border-slate-100 bg-white p-8 shadow-[0_1px_3px_rgba(0,0,0,0.06)] sm:p-10">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+                  Prenez rendez-vous pour votre projet
+                </h2>
+                <p className="mt-2 max-w-xl text-slate-600">
+                  Visite sur place gratuite, devis détaillé sous 48h, sans engagement.
+                  Du lundi au vendredi, de 8h00 à 18h00.
+                </p>
+              </div>
+              <div className="flex shrink-0 flex-col items-start gap-3">
+                <Button as="a" href="/#contact">
+                  Demander un rendez-vous
+                </Button>
+                <a
+                  href="tel:0652212017"
+                  className="text-sm font-semibold text-primary hover:underline"
+                >
+                  06 52 21 20 17
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Réalisations liées */}
       {realisations.length > 0 && (
         <section className="border-t border-slate-100 bg-slate-50/50 py-14 sm:py-16">
@@ -175,11 +240,41 @@ export default function ServicePage({ navHeight }: { navHeight: number }) {
               ))}
             </div>
             <Link
-              to="/realisations"
+              to={realisationsUrl(service.categories)}
               className="mt-8 inline-block text-sm font-semibold text-slate-900 underline decoration-slate-900 underline-offset-4 hover:text-primary hover:decoration-primary"
             >
-              Voir toutes les réalisations
+              Voir toutes les réalisations de cette catégorie
             </Link>
+          </div>
+        </section>
+      )}
+
+      {/* FAQ */}
+      {service.faq.length > 0 && (
+        <section className="border-t border-slate-100 bg-white py-14 sm:py-16">
+          <div className="mx-auto max-w-4xl px-6">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+              Questions fréquentes
+            </h2>
+            <div className="mt-6 divide-y divide-slate-100 rounded-2xl border border-slate-100 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
+              {service.faq.map((f) => (
+                <details key={f.question} className="group px-6 py-4">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold text-slate-900 [&::-webkit-details-marker]:hidden">
+                    {f.question}
+                    <svg
+                      className="h-5 w-5 shrink-0 text-slate-400 transition-transform group-open:rotate-180"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <p className="mt-3 leading-relaxed text-slate-600">{f.answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
       )}

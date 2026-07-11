@@ -188,25 +188,26 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
               </header>
 
               {item.coverUrl ? (
-                <div className="mt-8 overflow-hidden rounded-2xl border border-slate-100 bg-slate-100 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+                <div className="relative mt-8 overflow-hidden rounded-2xl border border-slate-100 bg-slate-100 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+                  {/* Fond flouté : évite de zoomer/recadrer les photos verticales */}
+                  <img
+                    src={cfImage(item.coverUrl, 80, { quality: 40 })}
+                    alt=""
+                    aria-hidden
+                    className="absolute inset-0 h-full w-full scale-110 object-cover opacity-60 blur-2xl"
+                    decoding="async"
+                  />
                   <img
                     src={cfImage(item.coverUrl, 1280)}
                     alt={item.title}
-                    className="h-[340px] w-full object-cover sm:h-[420px]"
-                    loading="lazy"
+                    className="relative mx-auto h-[340px] max-w-full object-contain sm:h-[460px]"
+                    fetchPriority="high"
                     decoding="async"
                   />
                 </div>
               ) : null}
 
-              {/* Contenu (Rich Text Contentful) */}
-              {item.content ? (
-                <div className="mt-10 max-w-3xl rounded-2xl border border-slate-100 bg-slate-50/70 p-6 text-[17px] sm:p-8">
-                  {documentToReactComponents(item.content, richTextOptions)}
-                </div>
-              ) : null}
-
-              {/* Photos (champ Contentful recommandé : photos [Media, many]) */}
+              {/* Photos d'abord (avant → après, chronologique) */}
               <div className="mt-12">
                 <h2 className="text-2xl font-bold tracking-tight text-slate-900">Photos</h2>
                 {item.photos.length === 0 ? (
@@ -240,6 +241,13 @@ export default function RealisationDetailPage({ navHeight }: { navHeight: number
                   </div>
                 )}
               </div>
+
+              {/* Contenu (Rich Text Contentful) */}
+              {item.content ? (
+                <div className="mt-10 max-w-3xl rounded-2xl border border-slate-100 bg-slate-50/70 p-6 text-[17px] sm:p-8">
+                  {documentToReactComponents(item.content, richTextOptions)}
+                </div>
+              ) : null}
 
               <Lightbox
                 photos={item.photos.map((p, idx) => ({

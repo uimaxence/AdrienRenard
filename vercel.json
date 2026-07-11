@@ -1,4 +1,31 @@
 {
+  "redirects": [
+    {
+      "source": "/services/amenagement-sur-mesure",
+      "destination": "/services/cuisines-salles-de-bains",
+      "permanent": true
+    },
+    {
+      "source": "/realisations/renovation-globale-maison-deux-sevres",
+      "destination": "/realisations/rehabilitation-logement-agricole-deux-sevres",
+      "permanent": true
+    },
+    {
+      "source": "/realisations/renovation-globale-maison-maine-et-loire",
+      "destination": "/realisations/creation-de-gites",
+      "permanent": true
+    },
+    {
+      "source": "/realisations/renovation-salon-salle-a-manger",
+      "destination": "/realisations/renovation-complete-rez-de-chaussee",
+      "permanent": true
+    },
+    {
+      "source": "/realisations/amenagements-exterieurs-terrasses-portails",
+      "destination": "/realisations/terrasse-bois-douglas-gers",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],

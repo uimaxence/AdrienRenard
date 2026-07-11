@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { contentfulClient, cfImage } from '../lib/contentful'
 import { slugify } from '../lib/slug'
 import SEO from '../components/SEO'
@@ -23,7 +23,18 @@ export default function RealisationsPage({ navHeight }: { navHeight: number }) {
   const [items, setItems] = useState<Realisation[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [activeCategory, setActiveCategory] = useState<string>('Tous')
+  // Filtre piloté par l'URL (?categorie=…, répétable) : les pages services et la
+  // home peuvent pointer directement vers une liste pré-filtrée.
+  const [searchParams, setSearchParams] = useSearchParams()
+  const activeCategories = useMemo(() => {
+    const fromUrl = searchParams.getAll('categorie').filter(Boolean)
+    return fromUrl.length > 0 ? fromUrl : ['Tous']
+  }, [searchParams])
+
+  function selectCategory(name: string) {
+    if (name === 'Tous') setSearchParams({}, { replace: true })
+    else setSearchParams({ categorie: name }, { replace: true })
+  }
 
   useEffect(() => {
     let cancelled = false
@@ -75,9 +86,9 @@ export default function RealisationsPage({ navHeight }: { navHeight: number }) {
   }, [items])
 
   const filtered = useMemo(() => {
-    if (activeCategory === 'Tous') return items
-    return items.filter((it) => it.category === activeCategory)
-  }, [items, activeCategory])
+    if (activeCategories.includes('Tous')) return items
+    return items.filter((it) => activeCategories.includes(it.category))
+  }, [items, activeCategories])
 
   return (
     <main style={{ paddingTop: navHeight }}>
@@ -102,12 +113,12 @@ export default function RealisationsPage({ navHeight }: { navHeight: number }) {
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => {
-              const active = cat.name === activeCategory
+              const active = activeCategories.includes(cat.name)
               return (
                 <button
                   key={cat.name}
                   type="button"
-                  onClick={() => setActiveCategory(cat.name)}
+                  onClick={() => selectCategory(cat.name)}
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
                     active
                       ? 'border-primary bg-primary text-white'

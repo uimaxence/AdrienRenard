@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { realisationsUrl } from '../data/services'
 import elec1 from '../assets/elec-1.webp'
 import int1 from '../assets/int-1.webp'
 import int2 from '../assets/int-2.webp'
 
 const services = [
   {
-    id: 'travaux-interieurs',
-    title: 'Travaux intérieurs',
+    id: 'renovation-complete',
+    title: 'Rénovation complète',
     image: int1,
     description:
-      'Cloisons, revêtements de sol, peinture, isolation. Je rénove vos espaces pour les rendre plus beaux et plus confortables.',
+      'Cloisons, revêtements de sol, peinture, isolation. Je rénove vos espaces de A à Z pour les rendre plus beaux et plus confortables.',
     href: '/services/renovation-interieure',
+    realisationsHref: realisationsUrl(['Rénovation complète']),
     icon: (
       <svg
         className="h-10 w-10 text-slate-900"
@@ -35,6 +37,7 @@ const services = [
     description:
       'Mise aux normes, création ou modification de tableau électrique, installation de systèmes modernes. Travaux certifiés.',
     href: '/services/electricite',
+    realisationsHref: realisationsUrl(['Électricité']),
     icon: (
       <svg
         className="h-10 w-10 text-slate-900"
@@ -52,12 +55,13 @@ const services = [
     ),
   },
   {
-    id: 'amenagement',
-    title: 'Aménagement sur-mesure',
+    id: 'cuisines-salles-de-bains',
+    title: 'Cuisines & salles de bains',
     image: int2,
     description:
-      'Cuisine, salle de bain, chambre… Je conçois et réalise des espaces adaptés à vos envies et à votre mode de vie.',
-    href: '/services/amenagement-sur-mesure',
+      'Cuisine, salle de bain, WC… Je rénove vos pièces d’eau de la dépose aux finitions, plomberie et électricité comprises.',
+    href: '/services/cuisines-salles-de-bains',
+    realisationsHref: realisationsUrl(['Cuisine', 'Salle de bain']),
     icon: (
       <svg
         className="h-10 w-10 text-slate-900"
@@ -114,7 +118,7 @@ export default function ServicesSection() {
           {services.map((service, index) => (
             <article
               key={service.id}
-              className={`group relative flex h-[28rem] min-h-0 flex-col overflow-hidden rounded-xl border border-slate-100 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] ${
+              className={`group relative flex min-h-[28rem] flex-col overflow-hidden rounded-xl border border-slate-100 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.06)] transition-all duration-500 ease-out hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] ${
                 horizontalOffset[index]
               } ${stairOffset[index]} ${
                 visible
@@ -144,27 +148,35 @@ export default function ServicesSection() {
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
                   {service.description}
                 </p>
-                <Link
-                  to={service.href}
-                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 underline decoration-slate-900 underline-offset-4 transition-colors group-hover:text-primary group-hover:decoration-primary"
-                >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-slate-900 text-white transition-colors group-hover:bg-primary group-hover:text-white">
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13 7l5 5m0 0l-5 5m5-5H6"
-                      />
-                    </svg>
-                  </span>
-                  Découvrir ce service
-                </Link>
+                <div className="mt-4 flex flex-col gap-2">
+                  <Link
+                    to={service.href}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 underline decoration-slate-900 underline-offset-4 transition-colors group-hover:text-primary group-hover:decoration-primary"
+                  >
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-slate-900 text-white transition-colors group-hover:bg-primary group-hover:text-white">
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2.5}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                      </svg>
+                    </span>
+                    Découvrir ce service
+                  </Link>
+                  <Link
+                    to={service.realisationsHref}
+                    className="inline-flex items-center gap-2 pl-10 text-sm font-medium text-slate-600 hover:text-primary hover:underline"
+                  >
+                    Voir les réalisations
+                  </Link>
+                </div>
               </div>
             </article>
           ))}

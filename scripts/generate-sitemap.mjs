@@ -61,7 +61,7 @@ async function main() {
     urlEntry(`${SITE_URL}/realisations`, today, '0.8', 'weekly'),
     urlEntry(`${SITE_URL}/services/renovation-interieure`, today, '0.9', 'monthly'),
     urlEntry(`${SITE_URL}/services/electricite`, today, '0.9', 'monthly'),
-    urlEntry(`${SITE_URL}/services/amenagement-sur-mesure`, today, '0.9', 'monthly'),
+    urlEntry(`${SITE_URL}/services/cuisines-salles-de-bains`, today, '0.9', 'monthly'),
     urlEntry(`${SITE_URL}/mentions-legales`, today, '0.2', 'yearly'),
     ...realisations
       .filter((r) => r.slug)
