@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router-dom'
 import heroPhoto from '../assets/hero-photo.webp'
 import Button from './Button'
 
 export default function Hero() {
+  const navigate = useNavigate()
   return (
     <section className="relative flex min-h-[56vh] items-center overflow-hidden bg-slate-900">
       {/* Photo de fond */}
@@ -34,7 +36,11 @@ export default function Hero() {
           </Button>
           <Button
             as="a"
-            href="#realisations"
+            href="/realisations"
+            onClick={(e) => {
+              e.preventDefault()
+              navigate('/realisations')
+            }}
             variant="secondary"
             className="text-white hover:text-white/80"
           >
